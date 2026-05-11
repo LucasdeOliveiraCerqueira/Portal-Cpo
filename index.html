@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal CPO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Portal CPO</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Seção de Recepção -->
+        <section class="reception">
+            <div class="reception-content">
+                <div class="reception-badge">Home</div>
+                <h1>Plataforma de Estudos</h1>
+                <p class="subtitle">3° Ano - Ensino Médio</p>
+                <p class="description">Selecione uma disciplina para acessar conteúdos organizados com clareza, rigor e foco pedagógico.</p>
+                <div class="reception-points">
+                    <button class="filter-chip active" data-filter="all" type="button">Todos</button>
+                    <button class="filter-chip" data-filter="linguagens" type="button">Linguagens</button>
+                    <button class="filter-chip" data-filter="humanas" type="button">Humanas</button>
+                    <button class="filter-chip" data-filter="natureza" type="button">Natureza</button>
+                    <button class="filter-chip" data-filter="matematica" type="button">Matemática</button>
+                    <button class="filter-chip" data-filter="redacao" type="button">Redação</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid de Matérias -->
+        <section class="subjects-grid">
+            <div class="subject-card" data-categories="matematica" onclick="goToSubject('matematica')">
+                <div class="subject-icon">📐</div>
+                <h2>Matemática</h2>
+                <p>Álgebra, Geometria, Trigonometria...</p>
+            </div>
+
+            <div class="subject-card" data-categories="linguagens" onclick="goToSubject('gramatica')">
+                <div class="subject-icon">📘</div>
+                <h2>Gramática</h2>
+                <p>Classes, concordância, regência e uso formal da língua...</p>
+            </div>
+
+            <div class="subject-card" data-categories="natureza" onclick="goToSubject('biologia')">
+                <div class="subject-icon">🔬</div>
+                <h2>Biologia</h2>
+                <p>Célula, Genética, Ecologia...</p>
+            </div>
+
+            <div class="subject-card" data-categories="natureza" onclick="goToSubject('fisica')">
+                <div class="subject-icon">⚡</div>
+                <h2>Física</h2>
+                <p>Mecânica, Termodinâmica, Ondas...</p>
+            </div>
+
+            <div class="subject-card" data-categories="natureza" onclick="goToSubject('quimica')">
+                <div class="subject-icon">⚗️</div>
+                <h2>Química</h2>
+                <p>Elementos, Reações, Soluções...</p>
+            </div>
+
+            <div class="subject-card" data-categories="humanas" onclick="goToSubject('historia')">
+                <div class="subject-icon">🏛️</div>
+                <h2>História</h2>
+                <p>Brasil, Mundo, Civilizações...</p>
+            </div>
+
+            <div class="subject-card" data-categories="humanas natureza" onclick="goToSubject('geografia')">
+                <div class="subject-icon">🌍</div>
+                <h2>Geografia</h2>
+                <p>Clima, População, Economia...</p>
+            </div>
+
+
+
+            <div class="subject-card" data-categories="linguagens" onclick="goToSubject('ingles')">
+                <div class="subject-icon">🌐</div>
+                <h2>Inglês</h2>
+                <p>Vocabulário, Gramática, Conversação...</p>
+            </div>
+
+            <div class="subject-card" data-categories="humanas" onclick="goToSubject('filosofia')">
+                <div class="subject-icon">🤔</div>
+                <h2>Filosofia</h2>
+                <p>Ética, Lógica, Conhecimento...</p>
+            </div>
+
+            <div class="subject-card" data-categories="humanas" onclick="goToSubject('sociologia')">
+                <div class="subject-icon">👥</div>
+                <h2>Sociologia</h2>
+                <p>Sociedade, Cultura, Mudança Social...</p>
+            </div>
+
+            <div class="subject-card" data-categories="linguagens" onclick="goToSubject('arte')">
+                <div class="subject-icon">🎨</div>
+                <h2>Artes</h2>
+                <p>Pintura, Escultura, Teatro...</p>
+            </div>
+
+            <div class="subject-card" data-categories="linguagens redacao" onclick="goToSubject('redacao')">
+                <div class="subject-icon">✍️</div>
+                <h2>Redação</h2>
+                <p>Técnicas, Estrutura, Gêneros Textuais...</p>
+            </div>
+
+            <div class="subject-card" data-categories="linguagens" onclick="goToSubject('literatura')">
+                <div class="subject-icon">📖</div>
+                <h2>Literatura</h2>
+                <p>Gêneros, movimentos, análise de obras...</p>
+            </div>
+
+            <div class="subject-card" data-categories="linguagens redacao" onclick="goToSubject('interpretacao')">
+                <div class="subject-icon">🔍</div>
+                <h2>Interpretação</h2>
+                <p>Análise, Compreensão, Figuras de Linguagem...</p>
+            </div>
+
+            <div class="subject-card" data-categories="linguagens redacao" onclick="goToSubject('conhecimentos-adicionais')">
+                <div class="subject-icon">💡</div>
+                <h2>Conhecimentos Adicionais</h2>
+                <p>Ortografia, Pontuação, Dicas Importantes...</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

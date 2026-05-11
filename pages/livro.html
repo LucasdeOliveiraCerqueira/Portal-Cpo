@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro - Portal Educacional</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Portal Educacional</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container books-page" data-book-page>
+        <section class="books-page-hero">
+            <div class="books-page-topbar">
+                <button class="back-button book-back-button" onclick="window.history.back()">← Voltar</button>
+                <div class="books-meta">
+                    <span data-book-last-updated>Última atualização: --/--/----</span>
+                </div>
+            </div>
+
+            <div class="books-hero-main">
+                <h1 data-book-title>Livro</h1>
+                <p data-book-subtitle class="books-hero-subtitle">Capítulos organizados em lista expansível</p>
+            </div>
+        </section>
+
+        <section class="chapters-section">
+            <h2>Capítulos</h2>
+            <!-- Cada capítulo fica um abaixo do outro; clique na seta para expandir. -->
+            <div class="chapters-grid" data-chapters-grid></div>
+        </section>
+
+        <!--
+            Ponto de edição dos anexos:
+            - Abra a página da matéria (ex.: biologia.html)
+            - Localize o bloco subjectBookConfig (EDITE AQUI)
+            - Use `subsubjects` para criar divisões como "Mat 1" e "Mat 2"
+            - Cada submatéria já recebe automaticamente os 6 livros
+            - Use `books` dentro de cada submatéria para mudar nome e capítulos
+            - Use `attachments` para adicionar materiais por livro e capítulo
+            - Os botões de visualizar e baixar aparecerão automaticamente
+        -->
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

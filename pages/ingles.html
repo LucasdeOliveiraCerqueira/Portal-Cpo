@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inglês - Portal de Matérias</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .subject-page {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .subject-page h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .subject-page p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .topics-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .topic-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .topic-item:hover {
+            transform: scale(1.05);
+        }
+
+        .topic-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .back-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-button:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar"><div class="nav-container"><div class="nav-logo"><span class="logo-icon">📚</span><span class="logo-text">Portal Educacional</span></div></div></nav>
+    <div class="breadcrumb"><a href="../index.html">Início</a> / <span>Inglês</span></div>
+    <div class="subject-page">
+        <button class="back-button" onclick="window.history.back()">← Voltar</button>
+        <div class="subject-header">
+            <div class="subject-icon-large">🌐</div>
+            <div class="subject-header-text">
+                <h1>Inglês</h1>
+                <p>O Inglês é a língua internacional mais falada. Aprender Inglês abre oportunidades académicas, profissionais e pessoais em todo o mundo.</p>
+            </div>
+        </div>
+        <div class="topics-section">
+            <h2>Conteúdos Principais</h2>
+            <div class="topics-list">
+                <div class="topic-item"><h3>Vocabulário</h3><p>Palavras, expressões e frases</p></div>
+                <div class="topic-item"><h3>Gramática</h3><p>Tempos verbais, estruturas e regras</p></div>
+                <div class="topic-item"><h3>Conversação</h3><p>Diálogos, pronúncia e comunicação</p></div>
+                <div class="topic-item"><h3>Leitura</h3><p>Textos, poesia e interpretação</p></div>
+            </div>
+        </div>
+    </div>
+<script>
+        /* =====================================================================
+           CONFIGURACAO DE LIVROS E CAPITULOS DESTA MATERIA (EDITE AQUI)
+           ---------------------------------------------------------------------
+           1) chaptersByBook: define quantos capitulos cada livro tem.
+           2) attachments: define anexos por livro e capitulo.
+           3) Sempre que adicionar itens em attachments, os links de visualizar/
+              baixar aparecerao automaticamente na pagina do livro.
+           ===================================================================== */
+        window.subjectBookConfig = {
+            chaptersByBook: {
+                1: 24,
+                2: 24,
+                3: 24,
+                4: 24,
+                5: 24,
+                6: 24
+            },
+            attachments: {
+                // Exemplo de anexo:
+                // 1: { // Livro 1
+                //     1: [ // Capitulo 1
+                //         {
+                //             label: 'Nome do arquivo',
+                //             viewUrl: '../docs/sua-materia/livro1/capitulo1.pdf',
+                //             downloadUrl: '../docs/sua-materia/livro1/capitulo1.pdf'
+                //         }
+                //     ]
+                // }
+            }
+        };
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>

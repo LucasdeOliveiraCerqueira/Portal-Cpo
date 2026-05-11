@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemática - Portal Educacional</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .navbar {
+            background: #1a3a52;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        body {
+            background: #f5f7fa;
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .breadcrumb a {
+            color: #2c5282;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .subject-page {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            margin: 0 auto 40px;
+            max-width: 1200px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .subject-icon-large {
+            font-size: 3.5rem;
+            opacity: 0.9;
+        }
+
+        .subject-header-text h1 {
+            color: #1a3a52;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subject-header-text p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .subject-page p {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .topics-section {
+            margin-top: 40px;
+        }
+
+        .topics-section h2 {
+            color: #1a3a52;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .topics-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .topic-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+            border-left: 4px solid #3498db;
+            color: #2c3e50;
+            padding: 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .topic-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #e8f4f8 0%, #dce9f0 100%);
+            border-left-color: #1a3a52;
+        }
+
+        .topic-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a3a52;
+        }
+
+        .topic-item p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .back-button {
+            background: #1a3a52;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .back-button:hover {
+            background: #2c5282;
+            transform: translateX(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .subject-page {
+                padding: 24px;
+            }
+
+            .subject-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .subject-header-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .topics-list {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px;
+            }
+
+            .topic-item {
+                padding: 18px;
+            }
+
+            .topic-item h3 {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .subject-page {
+                padding: 16px;
+                margin: 0 auto 20px;
+                border-radius: 6px;
+            }
+
+            .subject-header {
+                gap: 12px;
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+            }
+
+            .subject-icon-large {
+                font-size: 2.5rem;
+            }
+
+            .subject-header-text h1 {
+                font-size: 1.4rem;
+                margin-bottom: 6px;
+            }
+
+            .topics-section h2 {
+                font-size: 1.2rem;
+                margin-bottom: 16px;
+            }
+
+            .topics-list {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Portal Educacional</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Início</a> / <span>Matemática</span>
+    </div>
+
+    <div class="subject-page">
+        <button class="back-button" onclick="window.history.back()">← Voltar</button>
+        
+        <div class="subject-header">
+            <div class="subject-icon-large">📐</div>
+            <div class="subject-header-text">
+                <h1>Matemática</h1>
+                <p>A Matemática é a ciência que estuda quantidades, estruturas, espaço e mudanças. É fundamental para entender o mundo ao nosso redor e possui aplicações em diversas áreas da ciência e tecnologia.</p>
+            </div>
+        </div>
+
+        <div class="topics-section">
+            <h2>Conteúdos Principais</h2>
+            <div class="topics-list">
+                <div class="topic-item">
+                    <h3>Álgebra</h3>
+                    <p>Estudo de equações, polinômios, expressões algébricas e funções matemáticas</p>
+                </div>
+                <div class="topic-item">
+                    <h3>Geometria</h3>
+                    <p>Formas, espaço, propriedades das figuras planas e sólidos geométricos</p>
+                </div>
+                <div class="topic-item">
+                    <h3>Trigonometria</h3>
+                    <p>Relações entre ângulos e lados dos triângulos, funções trigonométricas</p>
+                </div>
+                <div class="topic-item">
+                    <h3>Cálculo</h3>
+                    <p>Limites, derivadas, integrais e análise de funções</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+        /* =====================================================================
+           CONFIGURAÇÃO DE LIVROS E SUBMATÉRIAS - EDITE AQUI!
+           =====================================================================
+           
+           Este bloco define como os livros desta matéria são organizados:
+           
+           1) SUBMATÉRIAS (opcional) - Dividão em grupo de livros
+              Ex: "Mat 1", "Mat 2", "Bio 1", "Bio 2"
+              Cada submatéria recebe automaticamente 6 livros padrão
+              
+           2) CADA LIVRO TEM:
+              - title: Nome exibido (ex: "Livro 1", "Mat 1", "Bio 2")
+              - chapters: Número de capítulos (padrão: 24)
+              
+           3) ANEXOS (materiais por capítulo)
+              Define arquivos PDF, vídeos, etc. para cada capítulo
+              Aparecem como links "Visualizar" e "Baixar" na página do livro
+              
+           EXEMPLO:
+           Quando um usuário clica em "Mat 1 > Livro 1", o sistema:
+           - Vai para a página de livro (pages/livro.html)
+           - Renderiza capítulos de 1 até 5 (conforme chapters: 5)
+           - Mostra anexos deste livro/capítulo se houver
+           ===================================================================== */
+        window.subjectBookConfig = {
+            subsubjects: {
+                'Mat 1': {
+                    books: {
+                        1: { title: 'Livro 1', chapters: 24 },
+                        2: { title: 'Livro 2', chapters: 24 },
+                        3: { title: 'Livro 3', chapters: 24 },
+                        4: { title: 'Livro 4', chapters: 24 },
+                        5: { title: 'Livro 5', chapters: 24 },
+                        6: { title: 'Livro 6', chapters: 24 }
+                    },
+                    attachments: {
+                        // Exemplo (descomente para usar):
+                        // 1: {
+                        //     1: [
+                        //         {
+                        //             label: 'Apostila - Capítulo 1',
+                        //             viewUrl: '../docs/matematica/mat-1/livro1/capitulo1.pdf',
+                        //             downloadUrl: '../docs/matematica/mat-1/livro1/capitulo1.pdf'
+                        //         }
+                        //     ],
+                        //     2: [
+                        //         {
+                        //             label: 'Vídeo Aula - Capítulo 2',
+                        //             viewUrl: 'https://youtube.com/watch?v=...',
+                        //             downloadUrl: ''  // Não tem download
+                        //         }
+                        //     ]
+                        // }
+                    }
+                },
+                /* SUBMATÉRIA: Mat 2
+                   Mostra como "Mat 2" na página de Matemática
+                   Se não definir "books" aqui, recebe automaticamente os 6 padrões
+                */
+                'Mat 2': {
+                    /* Se não quiser adicionar anexos em Mat 2, pode deixar vazio */
+                    attachments: {
+                        // Adicione anexos aqui se necessário
+                    }
+                }
+                
+                /* PARA ADICIONAR MAIS UMA SUBMATÉRIA:
+                   
+                   Copie e cole isto ANTES da chave fechante }:
+                   
+                   ,
+                   'Mat 3': {
+                       attachments: {}
+                   }
+                   
+                   Vai aparecer como "Mat 3" na página com os 6 livros padrão!
+                */
+            }
+        };
+        
+        /* =====================================================================
+           CONFIGURAÇÃO DE TÓPICOS - REDIRECIONAR PARA CAPÍTULOS
+           =====================================================================
+           
+           OPCIONAL: Permita que os tópicos cliquem e direcione para capítulos
+           Você não PRECISA usar isso se quiser deixar os tópicos estáticos.
+           
+           COMO USAR:
+           1. Descomente o bloco topicsRedirectConfig abaixo
+           2. Cada tópico aponta para um livro e capítulo
+           3. Ao clicar, redireciona para livro.html com os parâmetros corretos
+           4. O tópico fica com cursor de mão e efeito hover
+           
+           ESTRUTURA:
+           {
+               'Nome do Tópico': { book: 1, chapter: 5 },
+               'Outro Tópico': { book: 2, chapter: 3, subsubject: 'Mat 1' }
+           }
+           
+           Opções:
+           - book (obrigatório): Número do livro (1-6)
+           - chapter (obrigatório): Número do capítulo a destacar
+           - subsubject (opcional): Nome da submatéria, se houver
+           ===================================================================== */
+        
+        // Descomente e edite isto para habilitar redirecionamento de tópicos:
+        /*
+        window.topicsRedirectConfig = {
+            'Ólgebra': { book: 1, chapter: 1, subsubject: 'Mat 1' },
+            'Geometria': { book: 1, chapter: 8, subsubject: 'Mat 1' },
+            'Trigonometria': { book: 2, chapter: 3, subsubject: 'Mat 1' },
+            'Funções': { book: 2, chapter: 15, subsubject: 'Mat 1' },
+            'Cálculo': { book: 3, chapter: 5, subsubject: 'Mat 1' }
+        };
+        */
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>
