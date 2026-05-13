@@ -1,88 +1,457 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conhecimentos Adicionais - Portal Educacional</title>
+
     <link rel="stylesheet" href="../style.css">
+
     <style>
-        .navbar { background: #1a3a52; color: white; padding: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 100; }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; }
-        .nav-logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 600; }
-        .logo-icon { font-size: 1.8rem; }
-        body { background: #f5f7fa; }
-        .breadcrumb { max-width: 1200px; margin: 20px auto; padding: 0 20px; font-size: .9rem; color: #7f8c8d; }
-        .breadcrumb a { color: #2c5282; text-decoration: none; font-weight: 500; }
-        .subject-page { background: white; border-radius: 8px; padding: 40px; margin: 0 auto 40px; max-width: 1200px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-        .subject-header { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 2px solid #ecf0f1; }
-        .subject-icon-large { font-size: 3.5rem; opacity: .9; }
-        .subject-header-text h1 { color: #1a3a52; font-size: 2.2rem; margin-bottom: 8px; font-weight: 700; }
-        .subject-header-text p { color: #7f8c8d; font-size: .95rem; line-height: 1.6; }
-        .topics-section { margin-top: 40px; }
-        .topics-section h2 { color: #1a3a52; font-size: 1.5rem; margin-bottom: 24px; font-weight: 600; padding-bottom: 12px; border-bottom: 2px solid #3498db; }
-        .topics-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .topic-item { background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%); border-left: 4px solid #3498db; color: #2c3e50; padding: 24px; border-radius: 6px; cursor: pointer; transition: all .3s ease; }
-        .topic-item:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,.1); background: linear-gradient(135deg, #e8f4f8 0%, #dce9f0 100%); border-left-color: #1a3a52; }
-        .topic-item h3 { margin-bottom: 10px; font-size: 1.1rem; font-weight: 600; color: #1a3a52; }
-        .topic-item p { font-size: .9rem; color: #7f8c8d; margin: 0; }
-        .back-button { background: #1a3a52; color: white; border: none; padding: 12px 28px; border-radius: 6px; cursor: pointer; font-size: .95rem; margin-bottom: 30px; font-weight: 500; transition: all .3s ease; }
-        .back-button:hover { background: #2c5282; transform: translateX(-2px); }
+        body {
+            background:
+                radial-gradient(circle at top left,
+                    rgba(26, 58, 82, 0.08),
+                    transparent 30%),
+                radial-gradient(circle at top right,
+                    rgba(52, 152, 219, 0.08),
+                    transparent 26%),
+                #f5f7fa;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================== */
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .breadcrumb a {
+            color: #2c5282;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           BOTÃO VOLTAR
+        ========================== */
+
+        .back-button {
+            background: #1a3a52;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .back-button:hover {
+            background: #2c5282;
+            transform: translateX(-2px);
+        }
+
+        /* =========================
+           SEÇÃO DE TÓPICOS
+        ========================== */
+
+        .topics-section {
+            margin-top: 20px;
+        }
+
+        .topics-section h2 {
+            margin-bottom: 12px;
+            font-size: 2rem;
+            color: #1a365d;
+        }
+
+        .section-note {
+            margin-bottom: 35px;
+            color: #5f6b7a;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* =========================
+           GRID DOS CARDS
+        ========================== */
+
+        .subjects-grid {
+            margin-top: 45px;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        /* =========================
+           CARDS
+        ========================== */
+
+        .subject-card {
+            text-decoration: none !important;
+            color: inherit !important;
+
+            background: white;
+            border-radius: 18px;
+            padding: 30px 24px;
+
+            border-top: 4px solid #3498db;
+
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+            transition: all 0.3s ease;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            min-height: 320px;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .subject-card * {
+            text-decoration: none !important;
+        }
+
+        /* =========================
+           ÍCONE
+        ========================== */
+
+        .subject-icon {
+            font-size: 3.2rem;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           TAG
+        ========================== */
+
+        .card-tag {
+            background: #ebf4ff;
+            color: #2b6cb0;
+
+            padding: 6px 14px;
+
+            border-radius: 999px;
+
+            font-size: 0.8rem;
+            font-weight: 600;
+
+            margin-bottom: 10px;
+
+            text-transform: capitalize;
+        }
+
+        /* =========================
+           CAPÍTULO
+        ========================== */
+
+        .chapter-badge {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           TÍTULO
+        ========================== */
+
+        .subject-card h2 {
+            color: #1a365d;
+            font-size: 1.55rem;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        /* =========================
+           TEXTO
+        ========================== */
+
+        .subject-card p {
+            color: #5f6b7a;
+            line-height: 1.6;
+            font-size: 0.96rem;
+        }
+
+        /* =========================
+           FOOTNOTE
+        ========================== */
+
+        .card-footnote {
+            margin-top: auto;
+            padding-top: 18px;
+
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        /* =========================
+           RESPONSIVO
+        ========================== */
+
+        @media (max-width: 480px) {
+
+            .breadcrumb {
+                margin-top: 14px;
+                padding: 0 16px;
+            }
+
+            .topics-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .subjects-grid {
+                gap: 20px;
+            }
+
+            .subject-card {
+                min-height: auto;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <nav class="navbar"><div class="nav-container"><div class="nav-logo"><span class="logo-icon">📚</span><span class="logo-text">Portal Educacional</span></div></div></nav>
-    <div class="breadcrumb"><a href="../index.html">Início</a> / <span>Conhecimentos Adicionais</span></div>
-    <div class="subject-page">
-        <button class="back-button" onclick="window.history.back()">← Voltar</button>
-        <div class="subject-header">
-            <div class="subject-icon-large">💡</div>
-            <div class="subject-header-text">
-                <h1>Conhecimentos Adicionais</h1>
-                <p>Conteúdos complementares essenciais para aprofundar conhecimentos em Português. Inclui regras práticas, dicas importantes e tópicos que complementam disciplinas relacionadas.</p>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Portal Educacional</span>
             </div>
+
         </div>
-        <div class="topics-section">
-            <h2>Conteúdos Principais</h2>
-            <div class="topics-list">
-                <div class="topic-item"><h3>Ortografia</h3><p>Regras de escrita e acentuação correta</p></div>
-                <div class="topic-item"><h3>Pontuação</h3><p>Uso adequado de vírgulas, pontos e sinais</p></div>
-                <div class="topic-item"><h3>Variações Linguísticas</h3><p>Registro formal e informal, regionalismo</p></div>
-                <div class="topic-item"><h3>Dicas Práticas</h3><p>Estratégias de estudo e resolução de questões</p></div>
-            </div>
-        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="../index.html">Início</a> /
+        <span>Conhecimentos Adicionais</span>
     </div>
-<script>
-        /* =====================================================================
-           CONFIGURACAO DE LIVROS E CAPITULOS DESTA MATERIA (EDITE AQUI)
-           ---------------------------------------------------------------------
-           1) chaptersByBook: define quantos capitulos cada livro tem.
-           2) attachments: define anexos por livro e capitulo.
-           3) Sempre que adicionar itens em attachments, os links de visualizar/
-              baixar aparecerao automaticamente na pagina do livro.
-           ===================================================================== */
-        window.subjectBookConfig = {
-            chaptersByBook: {
-                1: 24,
-                2: 24,
-                3: 24,
-                4: 24,
-                5: 24,
-                6: 24
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- BOTÃO -->
+        <button class="back-button" onclick="window.history.back()">
+            ← Voltar
+        </button>
+
+        <div class="subject-page" data-no-book-navigation="true">
+
+            <!-- HERO -->
+            <section class="reception">
+
+                <div class="reception-content">
+
+                    <div class="reception-badge" id="page-badge">
+                        Aprender+
+                    </div>
+
+                    <h1 id="page-title">
+                        Conhecimentos Adicionais
+                    </h1>
+
+                    <p class="subtitle" id="page-subtitle">
+                        Apoio rápido para revisar português com organização visual parecida com a home.
+                    </p>
+
+                    <p class="description" id="page-description">
+                        Edite um único bloco de configuração para mudar o texto do topo, os filtros e os cards desta página.
+                    </p>
+
+                    <div class="reception-points" id="page-filters"></div>
+
+                </div>
+
+            </section>
+
+            <!-- TÓPICOS -->
+            <section class="topics-section">
+
+                <h2 id="topics-title">
+                    Conteúdos Principais
+                </h2>
+
+                <p class="section-note" id="topics-note">
+                    Os cards abaixo funcionam como atalhos. O filtro no topo mostra apenas os itens da categoria escolhida.
+                </p>
+
+                <div class="subjects-grid" id="topics-grid"></div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        window.conhecimentosAdicionaisConfig = {
+
+            hero: {
+                badge: 'Aprender+',
+                title: 'Conhecimentos Adicionais',
+                subtitle: 'Apoio para estudar conteúdos extras.',
+                description: 'Você pode acessar aqui os conteúdos complementares para reforçar seus conhecimentos.'
             },
-            attachments: {
-                // Exemplo de anexo:
-                // 1: { // Livro 1
-                //     1: [ // Capitulo 1
-                //         {
-                //             label: 'Nome do arquivo',
-                //             viewUrl: '../docs/sua-materia/livro1/capitulo1.pdf',
-                //             downloadUrl: '../docs/sua-materia/livro1/capitulo1.pdf'
-                //         }
-                //     ]
-                // }
-            }
+
+            topicsTitle: 'Conteúdos Principais',
+
+            topicsNote: 'Os cards abaixo funcionam como atalhos. O filtro no topo mostra apenas os itens da categoria escolhida.',
+
+            filters: [
+                { label: 'Todos', value: 'all', active: true },
+                { label: 'Escrita', value: 'escrita' },
+                { label: 'Pontuação', value: 'pontuacao' },
+                { label: 'Leitura', value: 'leitura' },
+                { label: 'Dicas', value: 'dicas' }
+            ],
+
+            topics: [
+
+                {
+                    title: 'Ortografia',
+                    icon: '✍️',
+                    description: 'Regras de escrita, acentuação e palavras que mais caem em prova.',
+                    categories: ['escrita'],
+                    book: 1,
+                    chapter: 1,
+                    chapterLabel: 'Capítulo 1',
+                    footnote: 'Revisão rápida de escrita e acentuação.'
+                },
+
+                {
+                    title: 'Pontuação',
+                    icon: '📝',
+                    description: 'Uso de vírgula, ponto, dois-pontos, travessão e outros sinais.',
+                    categories: ['pontuacao', 'escrita'],
+                    book: 1,
+                    chapter: 2,
+                    chapterLabel: 'Capítulo 2',
+                    footnote: 'Treino direto de sinais de pontuação.'
+                },
+
+                {
+                    title: 'Variações Linguísticas',
+                    icon: '🌍',
+                    description: 'Registro formal e informal, regionalismos e adequação de linguagem.',
+                    categories: ['leitura'],
+                    book: 2,
+                    chapter: 1,
+                    chapterLabel: 'Capítulo 1',
+                    footnote: 'Ajuda na leitura e interpretação de texto.'
+                },
+
+                {
+                    title: 'Dicas Práticas',
+                    icon: '💡',
+                    description: 'Estratégias rápidas para estudar, revisar e acertar mais questões.',
+                    categories: ['dicas'],
+                    book: 2,
+                    chapter: 2,
+                    chapterLabel: 'Capítulo 2',
+                    footnote: 'Atalho para revisão final.'
+                }
+
+            ]
         };
+
+        window.topicsRedirectConfig = Object.fromEntries(
+            window.conhecimentosAdicionaisConfig.topics.map(topic => [
+                topic.title,
+                {
+                    book: topic.book,
+                    chapter: topic.chapter
+                }
+            ])
+        );
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const config = window.conhecimentosAdicionaisConfig;
+
+            const filterContainer = document.getElementById('page-filters');
+            const topicsGrid = document.getElementById('topics-grid');
+
+            document.getElementById('page-badge').textContent = config.hero.badge;
+            document.getElementById('page-title').textContent = config.hero.title;
+            document.getElementById('page-subtitle').textContent = config.hero.subtitle;
+            document.getElementById('page-description').textContent = config.hero.description;
+            document.getElementById('topics-title').textContent = config.topicsTitle;
+            document.getElementById('topics-note').textContent = config.topicsNote;
+
+            filterContainer.innerHTML = config.filters.map(filter => `
+                <button class="filter-chip ${filter.active ? 'active' : ''}"
+                        data-filter="${filter.value}"
+                        type="button">
+                    ${filter.label}
+                </button>
+            `).join('');
+
+            topicsGrid.innerHTML = config.topics.map(topic => {
+
+                const targetUrl = new URL('livro.html', window.location.href);
+
+                targetUrl.searchParams.set('subject', 'conhecimentos-adicionais');
+                targetUrl.searchParams.set('book', String(topic.book));
+                targetUrl.searchParams.set('chapter', String(topic.chapter));
+
+                return `
+                    <a class="subject-card"
+                       href="${targetUrl.pathname.split('/').pop()}${targetUrl.search}"
+                       data-topic="${topic.title}"
+                       data-categories="${topic.categories.join(' ')}">
+
+                        <div class="subject-icon">${topic.icon}</div>
+
+                        <div class="card-tag">
+                            ${topic.categories[0]}
+                        </div>
+
+                        <div class="chapter-badge">
+                            ${topic.chapterLabel}
+                        </div>
+
+                        <h2>${topic.title}</h2>
+
+                        <p>${topic.description}</p>
+
+                        <div class="card-footnote">
+                            ${topic.footnote}
+                        </div>
+
+                    </a>
+                `;
+            }).join('');
+        });
+
     </script>
+
     <script src="../script.js"></script>
+
 </body>
+
 </html>
