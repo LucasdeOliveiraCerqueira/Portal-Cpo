@@ -21,14 +21,55 @@
         }
 
         /* =========================
+           TOPO
+        ========================== */
+
+        .top-navigation {
+            max-width: 1200px;
+
+            margin: 20px auto 25px;
+
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        /* =========================
+           BOTÃO
+        ========================== */
+
+        .back-button {
+            background: #1a3a52;
+            color: white;
+
+            border: none;
+
+            padding: 10px 22px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 0.92rem;
+            font-weight: 500;
+
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #2c5282;
+            transform: translateX(-2px);
+        }
+
+        /* =========================
            BREADCRUMB
         ========================== */
 
         .breadcrumb {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #7f8c8d;
         }
 
@@ -43,34 +84,11 @@
         }
 
         /* =========================
-           BOTÃO VOLTAR
-        ========================== */
-
-        .back-button {
-            background: #1a3a52;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            margin-bottom: 30px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        .back-button:hover {
-            background: #2c5282;
-            transform: translateX(-2px);
-        }
-
-        /* =========================
-           SEÇÃO DE TÓPICOS
+           TÓPICOS
         ========================== */
 
         .topics-section {
-            margin-top: 20px;
+            margin-top: 35px;
         }
 
         .topics-section h2 {
@@ -87,11 +105,11 @@
         }
 
         /* =========================
-           GRID DOS CARDS
+           GRID
         ========================== */
 
         .subjects-grid {
-            margin-top: 45px;
+            margin-top: 35px;
 
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -107,7 +125,9 @@
             color: inherit !important;
 
             background: white;
+
             border-radius: 18px;
+
             padding: 30px 24px;
 
             border-top: 4px solid #3498db;
@@ -119,6 +139,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
             text-align: center;
 
             min-height: 320px;
@@ -209,15 +230,14 @@
            RESPONSIVO
         ========================== */
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
 
-            .breadcrumb {
-                margin-top: 14px;
-                padding: 0 16px;
+            .top-navigation {
+                flex-wrap: wrap;
             }
 
             .topics-section h2 {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
 
             .subjects-grid {
@@ -245,19 +265,24 @@
         </div>
     </nav>
 
-    <!-- BREADCRUMB -->
-    <div class="breadcrumb">
-        <a href="../index.html">Início</a> /
-        <span>Conhecimentos Adicionais</span>
-    </div>
-
-    <!-- CONTAINER -->
-    <div class="container">
+    <!-- TOPO -->
+    <div class="top-navigation">
 
         <!-- BOTÃO -->
         <button class="back-button" onclick="window.history.back()">
             ← Voltar
         </button>
+
+        <!-- BREADCRUMB -->
+        <div class="breadcrumb">
+            <a href="../index.html">Início</a> /
+            <span>Conhecimentos Adicionais</span>
+        </div>
+
+    </div>
+
+    <!-- CONTAINER -->
+    <div class="container">
 
         <div class="subject-page" data-no-book-navigation="true">
 
@@ -378,16 +403,6 @@
 
             ]
         };
-
-        window.topicsRedirectConfig = Object.fromEntries(
-            window.conhecimentosAdicionaisConfig.topics.map(topic => [
-                topic.title,
-                {
-                    book: topic.book,
-                    chapter: topic.chapter
-                }
-            ])
-        );
 
         document.addEventListener('DOMContentLoaded', function () {
 
