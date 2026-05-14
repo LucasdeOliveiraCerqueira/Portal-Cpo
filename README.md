@@ -380,6 +380,32 @@ window.subjectBookConfig = {
         }
     }
 }
+
+---
+
+## 🆕 Novidades (últimas alterações)
+
+- Suporte a nomes personalizados de capítulos (`chapterTitles`): agora cada livro pode conter um mapa opcional `chapterTitles` com chaves numéricas (ex: `1`, `2`) para mostrar nomes amigáveis em vez de apenas "Capítulo X`. Exemplo:
+
+```javascript
+// Em pages/{disciplina}.html (dentro de window.subjectBookConfig)
+books: {
+    1: { title: 'Livro 1', chapters: 24, chapterTitles: { 1: 'Introdução', 2: 'Revisão' } },
+    // ...
+}
+```
+
+- Edição localizada por página: você pode definir `chapterTitles` diretamente na página da disciplina (ex.: `pages/conhecimentos-adicionais.html`) usando um objeto local e referenciá-lo em `window.subjectBookConfig` — assim a customização fica no HTML da matéria.
+
+- Comportamento de fallback: se um capítulo não tiver título em `chapterTitles`, o site exibirá `Capítulo X` automaticamente.
+
+- Persistência: após editar o HTML, recarregue a página da disciplina e abra o livro. Se as alterações não aparecerem, remova a chave do localStorage `subjectBookConfig:SLUG` (onde `SLUG` é o slug da matéria) ou limpe o armazenamento local no DevTools.
+
+- Arquivos relacionados:
+    - `script.js` — leitura e renderização de `chapterTitles` (função `setupBookPage`).
+    - `pages/conhecimentos-adicionais.html` — exemplo prático com `conhecimentosAdicionaisChapterTitles` já implementado.
+
+Se quiser, eu adiciono exemplos prontos de `chapterTitles` para outras matérias; diga quais disciplinas quer preencher e eu faço a sugestão no README ou direto nas páginas.
 ```
 
 **Após normalização (localStorage):**
@@ -546,4 +572,3 @@ Todos os arquivos possuem comentários explicativos nas seções principais:
 - Como adicionar uma submatéria? → Veja "Editar Livros e Submatérias"
 - Onde colocar anexos? → Veja "Guia de Anexos"
 - Como mudar cores? → Veja "Cores e Branding"
-
