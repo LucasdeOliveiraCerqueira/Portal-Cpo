@@ -32,17 +32,17 @@ function goToSubject(subject) {
 /**
  * CONFIGURAÇÃO DE LIVROS - Padrão Global
  * Define os valores padrão para todas as matérias e submatérias
- * Cada livro tem um título e uma quantidade de capítulos
+ * Cada livro tem um título, uma quantidade de capítulos e, opcionalmente, nomes por capítulo
  * Estes valores serão usados como base se não forem sobrescritosa na página da matéria
  */
 const DEFAULT_BOOK_SETTINGS = {
     books: {
-        1: { title: 'Livro 1', chapters: 24 },
-        2: { title: 'Livro 2', chapters: 24 },
-        3: { title: 'Livro 3', chapters: 24 },
-        4: { title: 'Livro 4', chapters: 24 },
-        5: { title: 'Livro 5', chapters: 24 },
-        6: { title: 'Livro 6', chapters: 24 }
+        1: { title: 'Livro 1', chapters: 24, chapterTitles: {} },
+        2: { title: 'Livro 2', chapters: 24, chapterTitles: {} },
+        3: { title: 'Livro 3', chapters: 24, chapterTitles: {} },
+        4: { title: 'Livro 4', chapters: 24, chapterTitles: {} },
+        5: { title: 'Livro 5', chapters: 24, chapterTitles: {} },
+        6: { title: 'Livro 6', chapters: 24, chapterTitles: {} }
     },
     attachments: {},  // Não preenchido por padrão; cada matéria define seus anexos
     subsubjects: {}   // Não preenchido por padrão; cada matéria pode ter divisões como "Mat 1", "Mat 2"
@@ -89,7 +89,7 @@ function getCurrentSubjectSlug() {
  * Garante que todos os livros de 1 a 6 estejam presentes com valores válidos
  * 
  * @param {Object} config - Configuração de livros (pode ser de uma matéria ou submatéria)
- * @returns {Object} Objeto normalizado com books, chaptersByBook (compatibilidade) e attachments
+ * @returns {Object} Objeto normalizado com books, chaptersByBook (compatibilidade), chapterTitlesByBook e attachments
  */
 function normalizeBookCollection(config) {
     const safeConfig = config && typeof config === 'object' ? config : {};
@@ -125,6 +125,11 @@ function normalizeBookCollection(config) {
         
         // Tentar obter número de capítulos de várias fontes possíveis
         const chaptersValue = sourceBook.chapters ?? sourceBook.chapterCount ?? sourceChapters[bookNumber] ?? sourceChapters[String(bookNumber)] ?? defaultBook.chapters;
+
+        // Nomes editáveis dos capítulos: pode vir como objeto { 1: 'Nome', 2: 'Nome' }
+        const sourceChapterTitles = sourceBook.chapterTitles && typeof sourceBook.chapterTitles === 'object'
+            ? sourceBook.chapterTitles
+            : {};
         
         // Tentar obter título: personalizado > padrão
         const titleValue = typeof sourceBook.title === 'string' && sourceBook.title.trim() ? sourceBook.title.trim() : defaultBook.title;
@@ -135,7 +140,13 @@ function normalizeBookCollection(config) {
         books[bookNumber] = {
             title: titleValue,
             // Garantir que chapters seja um número válido entre 1 e infinito (padrão: 24)
-            chapters: Number.isFinite(parsedChapterCount) && parsedChapterCount > 0 ? Math.floor(parsedChapterCount) : 24
+            chapters: Number.isFinite(parsedChapterCount) && parsedChapterCount > 0 ? Math.floor(parsedChapterCount) : 24,
+            chapterTitles: Object.fromEntries(
+                Object.entries(sourceChapterTitles).map(([chapterNumber, chapterTitle]) => [
+                    chapterNumber,
+                    typeof chapterTitle === 'string' ? chapterTitle.trim() : ''
+                ]).filter(([, chapterTitle]) => chapterTitle)
+            )
         };
     });
 
@@ -144,6 +155,10 @@ function normalizeBookCollection(config) {
         // Estrutura antiga (compatibilidade): mapa de bookNumber => número de capítulos
         chaptersByBook: Object.fromEntries(
             Object.entries(books).map(([bookNumber, bookInfo]) => [bookNumber, bookInfo.chapters])
+        ),
+        // Estrutura opcional para nomes dos capítulos por livro
+        chapterTitlesByBook: Object.fromEntries(
+            Object.entries(books).map(([bookNumber, bookInfo]) => [bookNumber, bookInfo.chapterTitles || {}])
         ),
         // Anexos por livro e capítulo (preenchidos na página da matéria)
         attachments: safeConfig.attachments && typeof safeConfig.attachments === 'object'
@@ -247,7 +262,7 @@ function setupSubjectBookNavigation() {
     const topicsSection = document.querySelector('.topics-section');
 
     // Sair se não conseguir encontrar os elementos ou se já existe uma seção de livros
-    if (!subjectPage || !topicsSection || document.querySelector('.books-section')) {
+    if (!subjectPage || !topicsSection || document.querySelector('.books-section') || subjectPage.dataset.noBookNavigation === 'true') {
         return;
     }
 
@@ -349,7 +364,7 @@ function setupSubjectBookNavigation() {
  */
 function setupTopicsRedirect() {
     const subjectPage = document.querySelector('.subject-page');
-    const topicItems = document.querySelectorAll('.topic-item');
+    const topicItems = document.querySelectorAll('.topic-item, .subject-card[data-topic]');
     
     // Sair se não há configuração de tópicos
     if (!window.topicsRedirectConfig || !subjectPage) {
@@ -361,8 +376,10 @@ function setupTopicsRedirect() {
     
     // Para cada tópico na página
     topicItems.forEach(topicItem => {
-        // Extrair nome do tópico (do h3 ou primeiro elemento de texto)
-        const topicName = topicItem.querySelector('h3')?.textContent?.trim();
+        // Extrair nome do tópico (h3 nas páginas antigas, h2 nos cards novos)
+        const topicName = topicItem.querySelector('h3')?.textContent?.trim()
+            || topicItem.querySelector('h2')?.textContent?.trim()
+            || topicItem.dataset.topic?.trim();
         
         // Se este tópico está configurado
         if (topicName && window.topicsRedirectConfig[topicName]) {
@@ -445,6 +462,7 @@ function setupBookPage() {
     
     // Número de capítulos deste livro
     const chapterCount = Number(selectedBook.chapters || activeCollection.chaptersByBook[bookNumber] || activeCollection.chaptersByBook[book] || 24);
+    const chapterTitles = selectedBook.chapterTitles || activeCollection.chapterTitlesByBook[bookNumber] || activeCollection.chapterTitlesByBook[book] || {};
     
     // Anexos deste livro (materiais para cada capítulo)
     const currentBookContent = activeCollection.attachments[bookNumber] || activeCollection.attachments[book] || {};
@@ -480,6 +498,7 @@ function setupBookPage() {
         chaptersGrid.innerHTML = Array.from({ length: chapterCount }, (_, index) => {
             // Número do capítulo (1-indexed)
             const chapterNumber = index + 1;
+            const chapterTitle = chapterTitles[chapterNumber] || chapterTitles[String(chapterNumber)] || '';
             
             // Anexos (materiais) deste capítulo
             const chapterAttachments = currentBookContent[chapterNumber] || [];
@@ -503,7 +522,7 @@ function setupBookPage() {
             return `
                 <details class="chapter-accordion">
                     <summary class="chapter-summary">
-                        <span>Capítulo ${chapterNumber}</span>
+                        <span>${chapterTitle ? `${chapterNumber}. ${chapterTitle}` : `Capítulo ${chapterNumber}`}</span>
                         <span class="chapter-arrow">⌄</span>
                     </summary>
                     <div class="chapter-body">
