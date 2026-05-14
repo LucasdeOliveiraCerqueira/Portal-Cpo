@@ -117,58 +117,42 @@
         }
 
         /* =========================
-   CARDS
-========================== */
+           CARDS
+        ========================== */
 
-.subject-card {
-    text-decoration: none !important;
-    color: inherit !important;
+        .subject-card {
+            text-decoration: none !important;
+            color: inherit !important;
 
-    background: white;
+            background: white;
 
-    border-radius: 18px;
+            border-radius: 18px;
 
-    padding: 30px 24px;
+            padding: 30px 24px;
 
-    border-top: 4px solid #3498db;
+            border-top: 4px solid #3498db;
 
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+            transition: all 0.3s ease;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    text-align: center;
+            text-align: center;
 
-    height: 320px;
+            min-height: 320px;
+        }
 
-    overflow: hidden;
+        .subject-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
 
-    position: relative;
-}
-
-.subject-card:hover {
-    transform: translateY(-6px);
-
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-}
-
-.subject-card:active {
-    transform: translateY(-3px);
-}
-
-.subject-card:focus,
-.subject-card:focus-visible {
-    outline: none;
-}
-
-.subject-card * {
-    text-decoration: none !important;
-}
+        .subject-card * {
+            text-decoration: none !important;
+        }
 
         /* =========================
            ÍCONE
@@ -300,7 +284,7 @@
     <!-- CONTAINER -->
     <div class="container">
 
-        <div class="subject-page" data-no-book-navigation="true">
+        <div class="subject-page">
 
             <!-- HERO -->
             <section class="reception">
@@ -349,6 +333,37 @@
     </div>
 
     <script>
+
+        // Configuração editável dos livros desta página.
+        // Altere aqui os títulos, capítulos, nomes dos capítulos ou anexos dos livros 1 a 6.
+        // Os nomes dos capítulos abaixo aparecem na página de livro.
+        const conhecimentosAdicionaisChapterTitles = {
+            1: {
+                1: 'Ortografia',
+                2: 'Pontuação'
+            },
+            2: {
+                1: 'Variações Linguísticas',
+                2: 'Dicas Práticas'
+            },
+            3: {},
+            4: {},
+            5: {},
+            6: {}
+        };
+
+        window.subjectBookConfig = {
+            books: {
+                1: { title: 'Livro 1', chapters: 24, chapterTitles: conhecimentosAdicionaisChapterTitles[1] },
+                2: { title: 'Livro 2', chapters: 24, chapterTitles: conhecimentosAdicionaisChapterTitles[2] },
+                3: { title: 'Livro 3', chapters: 24, chapterTitles: conhecimentosAdicionaisChapterTitles[3] },
+                4: { title: 'Livro 4', chapters: 24, chapterTitles: conhecimentosAdicionaisChapterTitles[4] },
+                5: { title: 'Livro 5', chapters: 24, chapterTitles: conhecimentosAdicionaisChapterTitles[5] },
+                6: { title: 'Livro 6', chapters: 24, chapterTitles: conhecimentosAdicionaisChapterTitles[6] }
+            },
+            attachments: {},
+            subsubjects: {}
+        };
 
         window.conhecimentosAdicionaisConfig = {
 
